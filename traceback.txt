@@ -1,0 +1,28 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/greenhouse.rpy", line 81, in script
+    $ count +=1
+  File "game/greenhouse.rpy", line 81, in <module>
+    $ count +=1
+TypeError: 'int' object is not iterable
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/greenhouse.rpy", line 81, in script
+    $ count +=1
+  File "D:\apps\renpy-8.2.1-sdk\renpy\ast.py", line 823, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "D:\apps\renpy-8.2.1-sdk\renpy\python.py", line 1178, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "game/greenhouse.rpy", line 81, in <module>
+    $ count +=1
+  File "D:\apps\renpy-8.2.1-sdk\renpy\revertable.py", line 97, in do_mutation
+    return method(self, *args, **kwargs)
+TypeError: 'int' object is not iterable
+
+Windows-10-10.0.19045 AMD64
+Ren'Py 8.2.1.24030407
+Eco Emergency 1.0
+Wed Mar 20 08:48:23 2024
