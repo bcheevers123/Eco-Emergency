@@ -2,9 +2,29 @@
 errors listed below, and try again.
 
 
-File "game/greenhouse.rpy", line 93: expected 'image_name_component' not found.
-    hide
+File "game/greenhouse.rpy", line 179: expected 'image_name_component' not found.
+    show("polaroid_image", xpos=0.5, ypos=0.5, file="game/images/polaroid/greenhouse/window.png")
         ^
 
-Ren'Py Version: Ren'Py 8.2.1.24030407
-Wed Mar 20 10:12:01 2024
+File "game/greenhouse.rpy", line 186: expected 'image_name_component' not found.
+    hide("polaroid_image")
+        ^
+
+File "game/greenhouse.rpy", line 194: expected 'image_name_component' not found.
+    show("polaroid_image", xpos=0.5, ypos=0.5, file="game/images/polaroid/greenhouse/spray.png")
+        ^
+
+File "game/greenhouse.rpy", line 199: expected 'image_name_component' not found.
+    hide("polaroid_image")
+        ^
+
+File "game/greenhouse.rpy", line 207: expected 'image_name_component' not found.
+    show("polaroid_image", xpos=0.5, ypos=0.5, file="game/images/polaroid/greenhouse/fertilizer.png")
+        ^
+
+File "game/greenhouse.rpy", line 213: expected 'image_name_component' not found.
+    hide("polaroid_image")
+        ^
+
+Ren'Py Version: Ren'Py 8.0.3.22090809
+Tue Apr 16 15:12:22 2024

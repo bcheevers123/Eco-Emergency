@@ -1,0 +1,9 @@
+# Ren'Py specific files
+errors.txt
+/game/cache/
+/game/characters.rpyc
+/game/*.rpyc
+log.txt
+traceback.txt
+# Save files
+/game/saves/

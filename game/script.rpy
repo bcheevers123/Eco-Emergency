@@ -1,5 +1,10 @@
 ﻿# The script of the game goes in this file.
 
+# Define a function to display the polaroid image and fade out at the end of the dialogue
+init python:
+    def display_polaroid(loc, clue):
+        return "polaroid/{}/{}.png".format(loc, clue)
+
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 image splash = "Logo Final.png"
@@ -24,9 +29,42 @@ label splashscreen:
 
 
 
+
+#TODO Add clue names to the checklist/inventory dictionary
+default game_clues = {
+    "greenhouse": {
+        "window": False,
+        "spraypaint": False,
+        "fertilizer": False
+    },
+    "water_pond": {
+        "clue_1": False,
+        "clue_2": False,
+        "clue_3": False
+    },
+    "vegetable_garden": {
+        "clue_1": False,
+        "clue_2": False,
+        "clue_3": False
+    },
+    "solar_panel": {
+        "clue_1": False,
+        "clue_2": False,
+        "clue_3": False
+    },
+    "recycling_area": {
+        "clue_1": False,
+        "clue_2": False,
+        "clue_3": False
+    }
+}
+
 # The game starts here.
 
+
+
 label start:
+
 
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the

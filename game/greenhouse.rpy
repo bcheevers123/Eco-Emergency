@@ -73,30 +73,163 @@ label greenhouse:
 
     cow "Umm, o-okay"
 
-    ###the player now will now ask two questions of the three possible choices
+### The player will now ask two questions of the three possible choices
 
-    hide badger noting idle
-    show badger noting
-    badger "Someone broke into a building recently and valdalized it..."
-   
-    $ questionAsked = []
+hide badger noting idle
+show badger noting
+badger "Someone broke into a building recently and vandalized it..."
 
-    menu questionAskedMenu:
-        set questionAsked
-        "Where were you the night of the vandalsim?":
-            cow "Well, I, uh, I was playing video games with my friends"
-            pass
+# Initialize a list to track questions that have been asked
+default questionAsked = []
+
+label questionAskedMenu:
+    # Check if two questions have already been asked
+    if len(questionAsked) >= 2:
+        ## TODO: Change Barry's Temp Dialogue.
+        badger "That's all my questions for now, I will now examine the crime scene."
+        jump greenhouseInvestigation
+
+    # Display the menu for asking questions
+    menu:
+        # Each question is shown only if it has not been asked before
+        "Where were you the night of the vandalism?" if "vandalism" not in questionAsked:
+            cow "Well, I, uh, I was playing video games with my friends."
+            $ questionAsked.append("vandalism")
             jump questionAskedMenu
         
-        "Who do you suspect broke into the eco-hub?":
+        "Who do you suspect broke into the eco-hub?" if "suspect" not in questionAsked:
             cow "Hmm, you see… Sheldon has been acting very s-s-suspicious. He’s very sneaky, I think he is capable of the crime."
-            pass
+            $ questionAsked.append("suspect")
             jump questionAskedMenu
 
-        "Why do you think someone would do this?":
-            cow "The hub does good things, I don't know why anyone would want to ruin it… "
-            pass
+        "Why do you think someone would do this?" if "reason" not in questionAsked:
+            cow "The hub does good things, I don't know why anyone would want to ruin it…"
+            $ questionAsked.append("reason")
             jump questionAskedMenu
+
+
+
+
+# Define the screen where the investigation takes place
+screen greenhouseInvestigationScreen:
+    # Display the background for the greenhouse investigation
+    add "bg_greenhouse.jpg"
+
+    # Image button for the window clue
+    imagebutton:
+        xpos 160  # Adjust this value based on the screenshot coordinates
+        ypos 540
+        #IMPORTANT: Must use relative paths
+        idle "clue_buttons/greenhouse/window_gh.jpg"
+        hover "clue_buttons/greenhouse/window_gh_hover.jpg"
+        action Jump("investigate_window")
+        hovered [Show("displayText", text="Examine the broken window."), Play("sound", "audio/click.wav")]
+        unhovered Hide("displayText")
+
+    # Image button for the spray paint clue
+    imagebutton:
+        xpos 860  # Adjust this value based on the screenshot coordinates
+        ypos 360
+        idle "clue_buttons/greenhouse/spray_gh.jpg"
+        hover "clue_buttons/greenhouse/spray_gh_hover.jpg"
+        action Jump("investigate_spraypaint")
+        hovered [Show("displayText", text="Look at the spray paint."), Play("sound", "audio/click.wav")]
+        unhovered Hide("displayText")
+
+    # Image button for the fertilizer clue
+    imagebutton:
+        xpos 380  # Adjust this value based on the screenshot coordinates
+        ypos 700
+        idle "clue_buttons/greenhouse/fert_gh.jpg"
+        hover "clue_buttons/greenhouse/fert_gh_hover.jpg"
+        action Jump("investigate_fertilizer")
+        hovered [Show("displayText", text="Check the bags of fertilizer."), Play("sound", "audio/click.wav")]
+        unhovered Hide("displayText")
+
+    # Image button for back button
+    imagebutton:
+        xpos 96  # Adjust this value based on the screenshot coordinates
+        ypos 1026
+        idle "clue_buttons/misc/back_button.jpg"
+        hover "clue_buttons/misc/back_button_hover.jpg"
+        action Jump("back_from_greenhouse")
+        hovered [Show("displayText", text="Leave the greenhouse."), Play("sound", "audio/click.wav")]
+        unhovered Hide("displayText")
+
+# Screen to show text when image buttons are hovered
+screen displayText(text=""):
+    text text xpos 0.5 ypos 0.95 align (.5, .5)  # Center the text on the bottom of the screen
+
+# The label where the actual investigation takes place
+label greenhouseInvestigation:
+    # Clear away all the character sprites so they don't get in the way
+    hide all
+    # Call the SCREEN that contains the investigation UI
+    call screen greenhouseInvestigationScreen
+
+    # The rest of your game logic goes here
+    return
+
+# Labels for the investigation of each clue
+
+##TODO change this placeholder text
+label investigate_window:
+
+    #Show Poloroid
+    show expression display_polaroid("greenhouse", "window")
+
+    "That's interesting! The glass fragments fall outside of the greenhouse. That means that the rock was thrown from within the greenhouse."
+    "Whoever the vandal is must have access to the greenhouse!"
+    $ game_clues["greenhouse"]["window"] = True
+
+    # Hide Poloroid
+    hide expression display_polaroid("greenhouse", "window")
+    # Must go "Back" to investigation screen
+    jump greenhouseInvestigation
+    return
+
+label investigate_spraypaint:
+
+    #Show Poloroid
+    show expression display_polaroid("greenhouse", "spray")
+    "Spray paint! Someone's twisted expression of art?!"
+    $ game_clues["greenhouse"]["spraypaint"] = True
+
+    # Hide Poloroid
+    hide expression display_polaroid("greenhouse", "spray")
+    # Must go "Back" to investigation screen
+    jump greenhouseInvestigation
+    return
+
+
+label investigate_fertilizer:
+    #Show Poloroid
+    show expression display_polaroid("greenhouse", "fertilizer")
+    
+    "Uh Oh! Stinky!"
+    $ game_clues["greenhouse"]["fertilizer"] = True
+
+    # Hide Poloroid
+    hide expression display_polaroid("greenhouse", "fertilizer")
+    # Must go "Back" to investigation screen
+    jump greenhouseInvestigation
+    return
+
+# User attempts to leave greenhouse
+label back_from_greenhouse:
+    # Check if they have obtained all three clues
+    if all(value == True for value in game_clues["greenhouse"].values()):
+        # If all clues are true, player can proceed
+        show badger "There is nothing more to investigate, time to move on."
+        hide all
+        jump EcoHub
+    else:
+        # If not all clues are true, player needs to investigate more
+        "I think there is still more to investigate!"
+        jump greenhouseInvestigation
+        return
+
+       
 
 
 
