@@ -1,9 +1,25 @@
 ﻿# The script of the game goes in this file.
 
 # Define a function to display the polaroid image and fade out at the end of the dialogue
+
+#All functions go inside init python
 init python:
     def display_polaroid(loc, clue):
         return "polaroid/{}/{}.png".format(loc, clue)
+
+    def check_investions():
+        global show_office
+        completed_areas = 0
+
+        for area, clues in game_clues.items():
+            if all(clues.values()):
+                completed_areas += 1
+        
+        if completed_areas >= 2:
+            show_office = True
+
+
+
 
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
@@ -38,7 +54,7 @@ default game_clues = {
         "fertilizer": False
     },
     "water_pond": {
-        "broken Pipe": False,
+        "broken pipe": False,
         "foot prints": False,
         "trash": False
     },
@@ -58,6 +74,11 @@ default game_clues = {
         "ripped paper": False
     }
 }
+
+# Flag variable to check if we should show office.
+default show_office = False
+
+
 
 # The game starts here.
 

@@ -7,3 +7,4 @@ log.txt
 traceback.txt
 # Save files
 /game/saves/
+cache/*
