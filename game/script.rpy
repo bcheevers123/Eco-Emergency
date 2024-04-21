@@ -38,24 +38,24 @@ default game_clues = {
         "fertilizer": False
     },
     "water_pond": {
-        "clue_1": False,
-        "clue_2": False,
-        "clue_3": False
+        "broken Pipe": False,
+        "foot prints": False,
+        "trash": False
     },
     "vegetable_garden": {
-        "clue_1": False,
-        "clue_2": False,
-        "clue_3": False
+        "hoove print": False,
+        "carrots": False,
+        "cloth": False
     },
     "solar_panel": {
-        "clue_1": False,
-        "clue_2": False,
-        "clue_3": False
+        "broken solar panel": False,
+        "cut wires": False,
+        "dirty solar panel": False
     },
     "recycling_area": {
-        "clue_1": False,
-        "clue_2": False,
-        "clue_3": False
+        "broken machine": False,
+        "trash bag": False,
+        "ripped paper": False
     }
 }
 

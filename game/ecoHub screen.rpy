@@ -30,6 +30,16 @@ screen mapScreen:
         hovered [Show("displayText", text="Pond"), Play("sound", "audio/click.wav")]
         unhovered Hide("displayText")
 
+    imagebutton:
+        xpos 1460   
+        ypos 529
+        idle "office_idle.png"  # Replace with your image file for the idle state.
+        hover "office_hover.png"  # Replace with your image file for the hover state.
+        action Jump("office")
+        hovered [Show("displayText", text="office"), Play("sound", "audio/click.wav")]
+        unhovered Hide("displayText")
+
+
 
 # This is the definition of the displayTextScreen screen.
 #screen displayTextScreen(displayText=""):
