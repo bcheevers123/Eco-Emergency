@@ -1,3 +1,12 @@
+init:
+    #Untested code
+    # Image definitions for different states of completion
+    image bg_greenhouse = "images/bg_greenhouse_normal.jpg"  # Default, no areas completed
+    image bg_greenhouse_1 = "images/bg_greenhouse_saturated_1.jpg"  # 1 area completed
+    image bg_greenhouse_2 = "images/bg_greenhouse_saturated_2.jpg"  # 2 areas completed
+    image bg_greenhouse_3 = "images/bg_greenhouse_saturated_3.jpg"  # 3 areas completed
+
+
 label greenhouse:
 
     label splashscreen1:
@@ -13,7 +22,19 @@ label greenhouse:
     scene black with dissolve
     with Pause(0.2)
 
-    scene bg_greenhouse
+
+    #UNTESTED CODE
+    if completed_areas_count == 0:
+        scene bg_greenhouse
+    elif completed_areas_count == 1:
+        scene bg_greenhouse_1
+    elif completed_areas_count == 2:
+        scene bg_greenhouse_2
+    elif completed_areas_count >= 3:
+        scene bg_greenhouse_3
+    with dissolve
+    
+    #scene bg_greenhouse
 
     show cow neutral with Dissolve (0.7)
     hide cow neutral
@@ -127,6 +148,8 @@ label questionAskedMenu:
 # Define the screen where the investigation takes place
 screen greenhouseInvestigationScreen:
     # Display the background for the greenhouse investigation
+
+    #use if statement constuct found in ecoHub screen.rpy line 25
     add "bg_greenhouse.jpg"
 
     # Image button for the window clue

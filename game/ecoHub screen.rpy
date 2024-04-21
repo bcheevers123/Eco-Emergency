@@ -1,9 +1,17 @@
 ## This was written incorrectly. I have fixed.
 
+
+# Saturation definitions
+image map_three_areas_completed = "map_three_areas_completed.png"
+image map_two_areas_completed = "map_two_areas_completed.png"
+image map_one_areas_completed = "map_one_areas_completed.png"
+image map_zero_areas_completed = "map_zero_areas_completed.png"
+
+
 # This label is what you jump to when you want to display the mapScreen.
 label EcoHub:
 
-    $ check_investions()
+    $ check_investigations()
 
 
     call screen mapScreen
@@ -13,7 +21,15 @@ label EcoHub:
 
 # This is the definition of the mapScreen screen.
 screen mapScreen:
-    add "map.png"
+    # Choose the map image based on the number of areas completed
+    if completed_areas_count >= 3:
+        add "map_three_areas_completed"
+    elif completed_areas_count == 2:
+        add "map_two_areas_completed"
+    elif completed_areas_count == 1:
+        add "map_one_areas_completed"
+    else:
+        add "map_zero_areas_completed"
 
     # Define an image button for the greenhouse.
     imagebutton:

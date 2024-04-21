@@ -4,19 +4,27 @@
 
 #All functions go inside init python
 init python:
+    from renpy.display import im
+    from renpy.display.im import matrix
     def display_polaroid(loc, clue):
         return "polaroid/{}/{}.png".format(loc, clue)
 
-    def check_investions():
-        global show_office
+
+    # Import Matrix Manipulation Library
+    def check_investigations():
+        global show_office, completed_areas_count
         completed_areas = 0
 
         for area, clues in game_clues.items():
             if all(clues.values()):
                 completed_areas += 1
-        
+
+        completed_areas_count = completed_areas  # Update the global variable with the number of completed areas
+
         if completed_areas >= 2:
             show_office = True
+    
+
 
 
 
@@ -77,6 +85,9 @@ default game_clues = {
 
 # Flag variable to check if we should show office.
 default show_office = False
+
+#Global counter of areas completed
+default completed_areas_count = 0
 
 
 
