@@ -332,7 +332,7 @@ screen navigation():
             ## The quit button is banned on iOS and unnecessary on Android and
             ## Web.
             #textbutton _("Quit") action Quit(confirm=not main_menu)
-            imagebutton auto "gui/quit_%s.png" focus_mask True action Quit(confirm=not main_menu) hovered [ Play("sound", "audio/click.wav") ] 
+            imagebutton auto "gui/quit_%s.png" focus_mask True action Quit(confirm=not main_menu) hovered [ Play("sound", "audio/click.wav") ]
 
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text

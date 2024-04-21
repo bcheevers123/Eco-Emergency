@@ -1,16 +1,30 @@
 label greenhouse:
+
+    label splashscreen1:
+    scene black
+    with Pause(0.2)
+
+
+    show text "Greenhouse" with dissolve
+    with Pause(0.5)
+
+    hide text with dissolve
+
+    scene black with dissolve
+    with Pause(0.2)
+
     scene bg_greenhouse
-    
+
     show cow neutral with Dissolve (0.7)
     hide cow neutral
 
-    show cow happy 
+    show cow happy
 
     cow "Hello, my name is Cooper the Cow!"
 
     cow "Welcome to the greenhouse!"
-    
-    hide cow happy 
+
+    hide cow happy
     show cow happy idle
 
     show badger neutral at left with moveinleft
@@ -30,7 +44,7 @@ label greenhouse:
 
     hide badger neutral
     show badger neutral idle
-    show cow neutral 
+    show cow neutral
     cow "I build homes for the trees to grow as big as they need"
     cow "and water the plants every day so they can grow strong"
     hide cow neutral
@@ -55,7 +69,7 @@ label greenhouse:
     hide cow happy
     show cow happy idle
 
-    hide badger neutral idle 
+    hide badger neutral idle
     show badger happy
 
     badger "That is very interesting, Cooper!"
@@ -69,7 +83,7 @@ label greenhouse:
     show badger noting idle
 
     hide cow happy idle with dissolve
-    show cow nervous 
+    show cow nervous
 
     cow "Umm, o-okay"
 
@@ -96,7 +110,7 @@ label questionAskedMenu:
             cow "Well, I, uh, I was playing video games with my friends."
             $ questionAsked.append("vandalism")
             jump questionAskedMenu
-        
+
         "Who do you suspect broke into the eco-hub?" if "suspect" not in questionAsked:
             cow "Hmm, you see… Sheldon has been acting very s-s-suspicious. He’s very sneaky, I think he is capable of the crime."
             $ questionAsked.append("suspect")
@@ -148,10 +162,10 @@ screen greenhouseInvestigationScreen:
 
     # Image button for back button
     imagebutton:
-        xpos 96  # Adjust this value based on the screenshot coordinates
-        ypos 1026
-        idle "clue_buttons/misc/back_button.jpg"
-        hover "clue_buttons/misc/back_button_hover.jpg"
+        xpos 1339  # Adjust this value based on the screenshot coordinates
+        ypos 881
+        idle "clue_buttons/misc/back_button.png"
+        hover "clue_buttons/misc/back_button_hover.png"
         action Jump("back_from_greenhouse")
         hovered [Show("displayText", text="Leave the greenhouse."), Play("sound", "audio/click.wav")]
         unhovered Hide("displayText")
@@ -205,8 +219,9 @@ label investigate_spraypaint:
 label investigate_fertilizer:
     #Show Poloroid
     show expression display_polaroid("greenhouse", "fertilizer")
-    
-    "Uh Oh! Stinky!"
+
+    "Hmm is this fertilizer?"
+    "But it seems all the plants are dead.."
     $ game_clues["greenhouse"]["fertilizer"] = True
 
     # Hide Poloroid
@@ -228,15 +243,3 @@ label back_from_greenhouse:
         "I think there is still more to investigate!"
         jump greenhouseInvestigation
         return
-
-       
-
-
-
-        
-
-            
-
-
-
-    
