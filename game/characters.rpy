@@ -157,7 +157,7 @@ init python:
 
 define Fox = Character("Sergeant F.Fox", color="fa6607", callback=type_sound)
 define cow = Character("Cooper the Cow",callback=type_sound2)
-define badger = Character("Billy the Badger",color="8a4d28",callback=type_sound3)
+define badger = Character("Billy the Badger",color="eda05c",callback=type_sound3)
 define rabbit = Character("Ruby the Rabbit")
 define snake = Character("Sheldon the Snake")
 define magpie = Character("Maggie the Magpie")
@@ -166,6 +166,8 @@ define frog = Character("Freddie the Frog")
 
 
 image Fox serious = "Fox.png"
+image Fox happy = "Fox_happy.png"
+image Fox evolved = "Fox_evolved.png"
 
 image employees = "employees.png"
 
@@ -217,8 +219,14 @@ image magpie angry idle = "magpie_angry_idle.png"
 
 image frog neutral = "frog_neutral.png"
 image frog neutral idle = "frog_neutral_idle.png"
+image frog happy = "frog_happy.png"
+image frog happy idle = "frog_happy_idle.png"
+image frog sad = "frog_sad.png"
+image frog sad idle = "frog_sad_idle.png"
+image frog thinking = "frog_thinking.png"
+image frog thinking idle = "frog_thinking_idle.png"
 
-
+image failed_investigation = "failed investigation.png"
 
 #example of a character with the typing sound
 #define Type = Character("Character with typing", callback=type_sound)

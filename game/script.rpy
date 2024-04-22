@@ -61,9 +61,9 @@ default game_clues = {
         "spraypaint": False,
         "fertilizer": False
     },
-    "water_pond": {
+    "pond": {
         "broken pipe": False,
-        "foot prints": False,
+        "footprints": False,
         "trash": False
     },
     "vegetable_garden": {
@@ -149,7 +149,7 @@ label start:
 
     Fox "We don’t have enough time for you to go everywhere"
 
-    Fox "After that, go to one outside location and one inside location"
+    Fox "Choose at least two locations and report back to the office!"
 
     Fox "Good luck Detective, I know you can do it…"
 

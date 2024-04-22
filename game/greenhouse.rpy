@@ -1,10 +1,10 @@
 init:
     #Untested code
     # Image definitions for different states of completion
-    image bg_greenhouse = "images/bg_greenhouse_normal.jpg"  # Default, no areas completed
-    image bg_greenhouse_1 = "images/bg_greenhouse_saturated_1.jpg"  # 1 area completed
-    image bg_greenhouse_2 = "images/bg_greenhouse_saturated_2.jpg"  # 2 areas completed
-    image bg_greenhouse_3 = "images/bg_greenhouse_saturated_3.jpg"  # 3 areas completed
+    image bg_greenhouse = "images/gh_zero_areas_completed.png"  # Default, no areas completed
+    image bg_greenhouse_1 = "images/gh_one_areas_completed.png"  # 1 area completed
+    image bg_greenhouse_2 = "images/gh_two_areas_completed.png"  # 2 areas completed
+    image bg_greenhouse_3 = "images/gh_three_areas_completed.png"  # 3 areas completed
 
 
 label greenhouse:
@@ -114,6 +114,7 @@ hide badger noting idle
 show badger noting
 badger "Someone broke into a building recently and vandalized it..."
 
+
 # Initialize a list to track questions that have been asked
 default questionAsked = []
 
@@ -121,7 +122,7 @@ label questionAskedMenu:
     # Check if two questions have already been asked
     if len(questionAsked) >= 2:
         ## TODO: Change Barry's Temp Dialogue.
-        badger "That's all my questions for now, I will now examine the crime scene."
+        badger "That's all my questions for now, I will now examine the crime scene."        
         jump greenhouseInvestigation
 
     # Display the menu for asking questions
@@ -154,32 +155,32 @@ screen greenhouseInvestigationScreen:
 
     # Image button for the window clue
     imagebutton:
-        xpos 160  # Adjust this value based on the screenshot coordinates
-        ypos 540
+        xpos 305  # Adjust this value based on the screenshot coordinates
+        ypos 478
         #IMPORTANT: Must use relative paths
-        idle "clue_buttons/greenhouse/window_gh.jpg"
-        hover "clue_buttons/greenhouse/window_gh_hover.jpg"
-        action Jump("investigate_window")
+        idle "clue_buttons/greenhouse/window_gh.png"
+        hover "clue_buttons/greenhouse/window_gh_hover.png"
+        action [Play ("sound", "audio/camera.wav"), Jump("investigate_window")]
         hovered [Show("displayText", text="Examine the broken window."), Play("sound", "audio/click.wav")]
         unhovered Hide("displayText")
 
     # Image button for the spray paint clue
     imagebutton:
-        xpos 860  # Adjust this value based on the screenshot coordinates
-        ypos 360
-        idle "clue_buttons/greenhouse/spray_gh.jpg"
-        hover "clue_buttons/greenhouse/spray_gh_hover.jpg"
-        action Jump("investigate_spraypaint")
+        xpos 609  # Adjust this value based on the screenshot coordinates
+        ypos 654
+        idle "clue_buttons/greenhouse/spray_gh.png"
+        hover "clue_buttons/greenhouse/spray_gh_hover.png"
+        action [Play ("sound", "audio/camera.wav"), Jump("investigate_spraypaint")]
         hovered [Show("displayText", text="Look at the spray paint."), Play("sound", "audio/click.wav")]
         unhovered Hide("displayText")
 
     # Image button for the fertilizer clue
     imagebutton:
-        xpos 380  # Adjust this value based on the screenshot coordinates
-        ypos 700
-        idle "clue_buttons/greenhouse/fert_gh.jpg"
-        hover "clue_buttons/greenhouse/fert_gh_hover.jpg"
-        action Jump("investigate_fertilizer")
+        xpos 93  # Adjust this value based on the screenshot coordinates
+        ypos 577
+        idle "clue_buttons/greenhouse/fert_gh.png"
+        hover "clue_buttons/greenhouse/fert_gh_hover.png"
+        action [Play ("sound", "audio/camera.wav"), Jump("investigate_fertilizer")]
         hovered [Show("displayText", text="Check the bags of fertilizer."), Play("sound", "audio/click.wav")]
         unhovered Hide("displayText")
 
@@ -189,7 +190,7 @@ screen greenhouseInvestigationScreen:
         ypos 881
         idle "clue_buttons/misc/back_button.png"
         hover "clue_buttons/misc/back_button_hover.png"
-        action Jump("back_from_greenhouse")
+        action [Play ("sound", "audio/back.wav"), Jump("back_from_greenhouse")]
         hovered [Show("displayText", text="Leave the greenhouse."), Play("sound", "audio/click.wav")]
         unhovered Hide("displayText")
 
@@ -204,7 +205,7 @@ label greenhouseInvestigation:
     # Call the SCREEN that contains the investigation UI
     call screen greenhouseInvestigationScreen
 
-    # The rest of your game logic goes here
+    # The rest of game logic goes here
     return
 
 # Labels for the investigation of each clue
@@ -213,10 +214,12 @@ label greenhouseInvestigation:
 label investigate_window:
 
     #Show Poloroid
+    hide cow nervous
     show expression display_polaroid("greenhouse", "window")
-
-    "That's interesting! The glass fragments fall outside of the greenhouse. That means that the rock was thrown from within the greenhouse."
-    "Whoever the vandal is must have access to the greenhouse!"
+    with Pause (0.5)
+    badger "That's interesting! The glass fragments fall outside of the greenhouse." 
+    badger "That means that the rock was thrown from within the greenhouse."
+    badger "Whoever the vandal is must have access to the greenhouse!"
     $ game_clues["greenhouse"]["window"] = True
 
     # Hide Poloroid
@@ -228,8 +231,10 @@ label investigate_window:
 label investigate_spraypaint:
 
     #Show Poloroid
+    hide cow nervous
     show expression display_polaroid("greenhouse", "spray")
-    "Spray paint! Someone's twisted expression of art?!"
+    with Pause (0.5)
+    badger "Spray paint! Someone's twisted expression of art?!"
     $ game_clues["greenhouse"]["spraypaint"] = True
 
     # Hide Poloroid
@@ -241,10 +246,11 @@ label investigate_spraypaint:
 
 label investigate_fertilizer:
     #Show Poloroid
+    hide cow nervous
     show expression display_polaroid("greenhouse", "fertilizer")
-
-    "Hmm is this fertilizer?"
-    "But it seems all the plants are dead.."
+    with Pause (0.5)
+    badger "Hmm is this fertilizer?"
+    badger "But it seems all the plants are dead.."
     $ game_clues["greenhouse"]["fertilizer"] = True
 
     # Hide Poloroid
@@ -258,7 +264,7 @@ label back_from_greenhouse:
     # Check if they have obtained all three clues
     if all(value == True for value in game_clues["greenhouse"].values()):
         # If all clues are true, player can proceed
-        show badger "There is nothing more to investigate, time to move on."
+        badger "There is nothing more to investigate, time to move on..."
         hide all
         jump EcoHub
     else:
