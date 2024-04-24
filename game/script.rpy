@@ -21,7 +21,7 @@ init python:
 
         completed_areas_count = completed_areas  # Update the global variable with the number of completed areas
 
-        if completed_areas >= 2:
+        if completed_areas >= 3:
             show_office = True
     
 
@@ -118,7 +118,7 @@ label start:
 
     Fox "Climate change is a big issue and the eco hub do amazing things to battle this"
 
-    Fox "Unfortunately, someone broke into the building recently and vandalized it… "
+    Fox "Unfortunately, someone broke into the building recently and vandalised it… "
 
     Fox "We are led to believe it was an employee since the criminal seemed to know their way around the site  "
 

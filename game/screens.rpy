@@ -141,7 +141,7 @@ style window:
 style namebox:
     xpos 150
     xanchor -50
-    xsize 453
+    xsize 500
     ypos gui.name_ypos
     ysize 120
 
@@ -246,17 +246,17 @@ screen quick_menu():
         hbox:
             style_prefix "quick"
 
-            xalign 0.5
+            xalign 0.47
             yalign 1.0
 
             textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
+            #textbutton _("History") action ShowMenu('history')
             textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+            #textbutton _("Auto") action Preference("auto-forward", "toggle")
+            #textbutton _("Save") action ShowMenu('save')
+            #textbutton _("Q.Save") action QuickSave()
+            #textbutton _("Q.Load") action QuickLoad()
+            #textbutton _("Prefs") action ShowMenu('preferences')
 
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
@@ -298,15 +298,15 @@ screen navigation():
         if main_menu:
 
             #textbutton _("Start") action Start()
+            
+            imagebutton auto "gui/start_%s.png" focus_mask True action Start() hovered [ Play("sound", "audio/click.wav") ] xpos 858 ypos 669
 
-            imagebutton auto "gui/start_%s.png" focus_mask True action Start() hovered [ Play("sound", "audio/click.wav") ]
 
+        #else:
 
-        else:
+            #textbutton _("History") action ShowMenu("history")
 
-            textbutton _("History") action ShowMenu("history")
-
-            textbutton _("Save") action ShowMenu("save")
+            #IItextbutton _("Save") action ShowMenu("save")
 
         #textbutton _("Load") action ShowMenu("load")
 
@@ -332,7 +332,8 @@ screen navigation():
             ## The quit button is banned on iOS and unnecessary on Android and
             ## Web.
             #textbutton _("Quit") action Quit(confirm=not main_menu)
-            imagebutton auto "gui/quit_%s.png" focus_mask True action Quit(confirm=not main_menu) hovered [ Play("sound", "audio/click.wav") ]
+
+            imagebutton auto "gui/quit_%s.png" focus_mask True action Quit(confirm=not main_menu) hovered [ Play("sound", "audio/click.wav") ] xpos 902 ypos 822
 
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text

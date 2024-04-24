@@ -2,7 +2,6 @@
 
 
 # Saturation definitions
-image map_three_areas_completed = "map_three_areas_completed.png"
 image map_two_areas_completed = "map_two_areas_completed.png"
 image map_one_areas_completed = "map_one_areas_completed.png"
 image map_zero_areas_completed = "map_zero_areas_completed.png"
@@ -24,6 +23,7 @@ screen mapScreen:
     # Choose the map image based on the number of areas completed
     if completed_areas_count >= 3:
         add "map_three_areas_completed"
+        
     elif completed_areas_count == 2:
         add "map_two_areas_completed"
     elif completed_areas_count == 1:
@@ -50,6 +50,34 @@ screen mapScreen:
         hovered [Show("displayText", text="Pond"), Play("sound", "audio/click.wav")]
         unhovered Hide("displayText")
 
+    imagebutton:
+        xpos 206
+        ypos 171
+        idle "garden_idle.png"  # Replace with your image file for the idle state.
+        hover "garden_hover.png"  # Replace with your image file for the hover state.
+        action Jump("vegetablegarden")
+        hovered [Show("displayText", text="Vegetable Garden"), Play("sound", "audio/click.wav")]
+        unhovered Hide("displayText")
+
+
+    imagebutton:
+        xpos 1302
+        ypos 23
+        idle "solar_idle.png"  # Replace with your image file for the idle state.
+        hover "solar_hover.png"  # Replace with your image file for the hover state.
+        action Jump("solarpanels")
+        hovered [Show("displayText", text="Solar Panels"), Play("sound", "audio/click.wav")]
+        unhovered Hide("displayText")
+
+    imagebutton:
+        xpos 1246
+        ypos 88
+        idle "recycling_idle.png"  # Replace with your image file for the idle state.
+        hover "recycling_hover.png"  # Replace with your image file for the hover state.
+        action Jump("recyclingcentre")
+        hovered [Show("displayText", text="Recycling Centre"), Play("sound", "audio/click.wav")]
+        unhovered Hide("displayText")
+
     if show_office:
         imagebutton:
             xpos 1476   
@@ -59,6 +87,8 @@ screen mapScreen:
             action Jump("office")
             hovered [Show("displayText", text=""), Play("sound", "audio/click.wav")]
             unhovered Hide("displayText")
+        
+        add "images/sign.png"
 
 
 
